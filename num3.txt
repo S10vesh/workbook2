@@ -1,0 +1,26 @@
+using System;
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Введите числитель: ");
+        int M = int.Parse(Console.ReadLine());
+        Console.Write("Введите знаменатель: ");
+        int N = int.Parse(Console.ReadLine());
+        int d = FindGCD(Math.Abs(M), Math.Abs(N));
+        int x = M / d;
+        int y = N / d;
+        Console.WriteLine($"Несократимая дробь: {x}/{y}");
+    }
+  
+    static int FindGCD(int x, int y)
+    {
+        while (y != 0)
+        {
+            int t = y;
+            y = x % y;
+            x = t;
+        }
+        return x;
+    }
+}
