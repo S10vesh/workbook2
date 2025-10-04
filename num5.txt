@@ -1,0 +1,86 @@
+using System;
+class Coffee
+{
+    private const int water1 = 300;
+    private const int water2 = 30;
+    private const int lmilk = 270;
+    
+    private const int amerP = 150;
+    private const int latP = 170;
+    
+    private int w;
+    private int m;
+
+    public void Run()
+    {
+        Console.Write("Вода(мл): ");
+        w = int.Parse(Console.ReadLine());
+        
+        Console.Write("Молоко(мл): ");
+        m = int.Parse(Console.ReadLine());
+        
+        Select();
+    }
+
+    private void Select()
+    {
+        Console.WriteLine("\nНапиток:");
+        Console.WriteLine("1 - Американо");
+        Console.WriteLine("2 - Латте");
+        
+        int c = int.Parse(Console.ReadLine());
+        
+        switch (c)
+        {
+            case 1:
+                Make1();
+                break;
+            case 2:
+                Make2();
+                break;
+            default:
+                Console.WriteLine("Нет");
+                break;
+        }
+    }
+
+    private void Make1()
+    {
+        if (w >= water1)
+        {
+            w -= water1;
+            Console.WriteLine($"Американо - {amerP} руб.");
+            Show();
+        }
+        else
+        {
+            Console.WriteLine("Мало воды");
+        }
+    }
+
+    private void Make2()
+    {
+        if (w >= water2 && m >= lmilk)
+        {
+            w -= water2;
+            m -= lmilk;
+            Console.WriteLine($"Латте - {latP} руб.");
+            Show();
+        }
+        else
+        {
+            Console.WriteLine("Мало ингредиентов");
+        }
+    }
+    private void Show()
+    {
+        Console.WriteLine($"Осталось воды: {w} мл");
+        Console.WriteLine($"Осталось молока: {m} мл");
+    }
+
+    static void Main()
+    {
+        Coffee machine = new Coffee();
+        machine.Run();
+    }
+}
