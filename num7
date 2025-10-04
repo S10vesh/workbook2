@@ -1,0 +1,49 @@
+using System;
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Введите количество модулей: ");
+        int n = int.Parse(Console.ReadLine());        
+        Console.Write("Введите ширину модуля: ");
+        int a = int.Parse(Console.ReadLine());      
+        Console.Write("Введите высоту модуля: ");
+        int b = int.Parse(Console.ReadLine());    
+        Console.Write("Введите ширину поля: ");
+        int w = int.Parse(Console.ReadLine());
+        Console.Write("Введите высоту поля: ");
+        int h = int.Parse(Console.ReadLine());   
+        if (!Check(n, a, b, w, h, 0) && !Check(n, b, a, w, h, 0))
+        {
+            Console.WriteLine("Максимальная толщина защиты: -1");
+            return;
+        }       
+        int l = 0;
+        int r = Math.Min(w, h) / 2; 
+        int ans = 0;     
+        while (l <= r)
+        {
+            int m = (l + r) / 2;   
+            if (Check(n, a, b, w, h, m) || Check(n, b, a, w, h, m))
+            {
+                ans = m;
+                l = m + 1;
+            }
+            else
+            {
+                r = m - 1;
+            }
+        }      
+        Console.WriteLine($"Максимальная толщина защиты: {ans}");
+    }   
+    static bool Check(int n, int a, int b, int w, int h, int d)
+    {
+        int aw = a + 2 * d;
+        int bh = b + 2 * d;
+        if (aw > w || bh > h)
+            return false;
+        int cols = w / aw;
+        int rows = h / bh;       
+        return cols * rows >= n;
+    }
+}
