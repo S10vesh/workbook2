@@ -1,0 +1,35 @@
+using System;
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Введите количество бактерий: ");
+        int bac = int.Parse(Console.ReadLine());
+        
+        Console.Write("Введите количество капель антибиотика: ");
+        int anti = int.Parse(Console.ReadLine());
+        
+        int currentBac = bac;
+        int time = 0;
+        int effect = anti * 10;
+        
+        Console.WriteLine("\nИзменение количества бактерий по часам:");
+        
+        while (effect > 0)
+        {
+            time++;
+            
+            currentBac = currentBac * 2;
+            
+            currentBac = currentBac - effect;            
+            effect = effect - anti;
+            
+            if (currentBac < 0)
+                currentBac = 0;         
+            Console.WriteLine($"Час {time}: Бактерий = {currentBac}, Эффект антибиотика = {effect}");
+        }
+        
+        Console.WriteLine($"\nЭксперимент длился {time} часов");
+        Console.WriteLine($"Итоговое количество бактерий: {currentBac}");
+    }
+}
